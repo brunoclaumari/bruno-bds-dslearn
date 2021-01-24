@@ -1,8 +1,6 @@
 package com.devsuperior.dslearnbds.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,20 +22,21 @@ public class Section implements Serializable {
 	private String description;
 	private Integer position;
 	private String imgUri;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "resource_id")
 	private Resource resource;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "prerequisite_id")
 	private Section prerequisite;
-
+	
 	public Section() {
 	}
 
 	public Section(Long id, String title, String description, Integer position, String imgUri, Resource resource,
 			Section prerequisite) {
+		super();
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -127,7 +126,4 @@ public class Section implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-
 }

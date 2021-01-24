@@ -25,11 +25,12 @@ public class Course implements Serializable {
 	
 	@OneToMany(mappedBy = "course")
 	private List<Offer> offers = new ArrayList<>();
-
+	
 	public Course() {
 	}
 
 	public Course(Long id, String name, String imgUri, String imgGrayUri) {
+		super();
 		this.id = id;
 		this.name = name;
 		this.imgUri = imgUri;
@@ -66,7 +67,7 @@ public class Course implements Serializable {
 
 	public void setImgGrayUri(String imgGrayUri) {
 		this.imgGrayUri = imgGrayUri;
-	}	
+	}
 
 	public List<Offer> getOffers() {
 		return offers;
@@ -96,7 +97,4 @@ public class Course implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-
 }

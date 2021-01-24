@@ -15,7 +15,6 @@ import javax.persistence.Table;
 
 import com.devsuperior.dslearnbds.entities.enums.ResourceType;
 
-
 @Entity
 @Table(name = "tb_resource")
 public class Resource implements Serializable {
@@ -31,17 +30,18 @@ public class Resource implements Serializable {
 	private ResourceType type;
 	
 	@ManyToOne
-	@JoinColumn(name="offer_id")
+	@JoinColumn(name = "offer_id")
 	private Offer offer;
-	
+
 	@OneToMany(mappedBy = "resource")
-	List<Section> sections = new ArrayList<>();
+	private List<Section> sections = new ArrayList<>();
 	
-	public Resource() {		
+	public Resource() {
 	}
 
 	public Resource(Long id, String title, String description, Integer position, String imgUri, ResourceType type,
-			Offer offer) {		
+			Offer offer) {
+		super();
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -131,9 +131,4 @@ public class Resource implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-
 }
