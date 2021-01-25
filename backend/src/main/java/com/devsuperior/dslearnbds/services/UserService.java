@@ -26,16 +26,14 @@ public class UserService implements UserDetailsService {
 	@Autowired
 	private UserRepository repository;
 	
+	@Autowired
+	private AuthService authService;
+	
 	
 	@Transactional(readOnly = true)
 	public UserDTO findById(Long id) {
-
-		/*
-		 * No lugar de um try/catch é usado o método 'orElseThrow' que lança a exceção
-		 * personalizada criada caso o 'obj' não traga valores na requisição.
-		 */
-		Optional<User> obj = repository.findById(id);
-		//User entity = obj.orElseThrow(() -> new EntityNotFoundException("Entity not found"));
+		authService.validateSelfOrAdmin(id);		
+		Optional<User> obj = repository.findById(id);		
 		User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
 
 		return new UserDTO(entity);
